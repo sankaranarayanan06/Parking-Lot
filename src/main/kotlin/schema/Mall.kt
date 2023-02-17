@@ -1,5 +1,6 @@
 package schema
 
+import exception.ParkingSlotUnavailable
 import java.util.*
 
 class Mall {
@@ -8,16 +9,22 @@ class Mall {
     private val parkingLot = Collections.nCopies(totalParkingSpot, false).toMutableList()
 
     fun parkVehicle(ticket: Ticket){
-        parkingLot[ticket.spot] = true
+        parkingLot[ticket.getAllocatedParkingLotNumber()] = true
     }
 
-    fun getFreeParkingSpot(): Int? {
+    fun unParkVehicle(ticket: Ticket){
+        parkingLot[ticket.getAllocatedParkingLotNumber()] = false
+    }
+
+    fun getFreeParkingSpot(): Int {
         for (spot in parkingLot.indices) {
             if (parkingLot[spot] == false) {
+                parkingLot[spot] = true
                 return spot
             }
         }
-        return null
+        throw ParkingSlotUnavailable()
     }
+
 
 }
