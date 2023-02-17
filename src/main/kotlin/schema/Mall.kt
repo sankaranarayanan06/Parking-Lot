@@ -1,7 +1,7 @@
 package schema
 
+import exception.InvalidVehicleTypeException
 import exception.ParkingSlotUnavailableException
-import exception.UnknownVehicleException
 import schema.VehicleType.CAR
 import java.util.*
 
@@ -28,13 +28,13 @@ class Mall {
             }
             throw ParkingSlotUnavailableException()
         }
-        throw UnknownVehicleException()
+        throw InvalidVehicleTypeException()
     }
 
     fun calculateFee(vehicle: VehicleType, parkedDuration: Long): Long {
         if (vehicle == CAR) {
             return parkedDuration * fare
         }
-        throw UnknownVehicleException()
+        throw InvalidVehicleTypeException()
     }
 }

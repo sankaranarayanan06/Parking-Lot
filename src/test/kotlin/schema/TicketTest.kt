@@ -1,6 +1,6 @@
 package schema
 
-import exception.UnknownVehicleException
+import exception.InvalidVehicleTypeException
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -16,7 +16,7 @@ class TicketTest {
 
     @Test
     fun `it should not generate a ticket for a Bike`() {
-        assertThrows<UnknownVehicleException> {
+        assertThrows<InvalidVehicleTypeException> {
             Ticket(vehicle = BIKE)
         }
     }

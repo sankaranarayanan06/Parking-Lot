@@ -1,7 +1,7 @@
 package schema
 
 import exception.ParkingSlotUnavailableException
-import exception.UnknownVehicleException
+import exception.InvalidVehicleTypeException
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -19,7 +19,7 @@ class MallTest {
     fun `it should test for an invalid vehicle type`() {
         val location = Mall()
 
-        assertThrows<UnknownVehicleException> {
+        assertThrows<InvalidVehicleTypeException> {
             location.getFreeParkingSpot(BIKE)
         }
     }

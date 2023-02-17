@@ -1,6 +1,6 @@
 package schema
 
-import exception.UnknownVehicleException
+import exception.InvalidVehicleTypeException
 import schema.VehicleType.CAR
 import java.time.LocalDateTime
 import java.time.LocalTime
@@ -14,10 +14,11 @@ class Ticket(
     private var vehicle: VehicleType
 ) {
     init {
-        if(vehicle != CAR){
-            throw UnknownVehicleException()
+        if (vehicle != CAR) {
+            throw InvalidVehicleTypeException()
         }
     }
+
     fun generateTicket(): String {
         return "Parking Ticket:\n\t" +
                 "Ticket Number:\t$ticketNumber\n\t" +
