@@ -1,5 +1,7 @@
 package schema
 
+import exception.UnknownVehicleException
+import schema.VehicleType.CAR
 import java.time.LocalDateTime
 import java.time.LocalTime
 
@@ -7,21 +9,32 @@ var TICKET_NUMBER = 0
 
 class Ticket(
     private val ticketNumber: Int = ++TICKET_NUMBER,
-    private val entryDate: LocalTime = LocalDateTime.now().withNano(0).toLocalTime(),
+    private val entryDate: LocalDateTime = LocalDateTime.now(),
+    private var allocatedParkingLotNumber: Int = Mall().getFreeParkingSpot(CAR),
+    private var vehicle: VehicleType
 ) {
-    private var parkedSpot: Int = 0
-
     init {
-        Mall().getFreeParkingSpot()?.let { parkedSpot = it }
+        if(vehicle != CAR){
+            throw UnknownVehicleException()
+        }
     }
     fun generateTicket(): String {
         return "Parking Ticket:\n\t" +
                 "Ticket Number:\t$ticketNumber\n\t" +
-                "Spot number:\t$parkedSpot\n\t" +
-                "Entry Date:\t${entryDate}"
+                "Spot number:\t$allocatedParkingLotNumber\n\t" +
+                "Entry Date:\t${entryDate.withNano(0).toLocalTime()}"
     }
 
-    fun getParkingSpot(): Int {
-        return parkedSpot
+    fun getAllocatedParkingLotNumber(): Int {
+        return allocatedParkingLotNumber
     }
+
+    fun getEntryDate(): LocalTime {
+        return entryDate.withNano(0).toLocalTime()
+    }
+
+    fun getVehicle(): VehicleType {
+        return vehicle
+    }
+
 }
