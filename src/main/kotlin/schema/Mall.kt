@@ -1,7 +1,7 @@
 package schema
 
 import exception.InvalidVehicleTypeException
-import exception.ParkingSlotUnavailableException
+import exception.ParkingSpotUnavailableException
 import schema.VehicleType.CAR
 import java.util.*
 
@@ -26,7 +26,7 @@ class Mall {
                     return spot
                 }
             }
-            throw ParkingSlotUnavailableException()
+            throw ParkingSpotUnavailableException()
         }
         throw InvalidVehicleTypeException()
     }

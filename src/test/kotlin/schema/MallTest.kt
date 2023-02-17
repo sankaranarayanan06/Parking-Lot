@@ -1,6 +1,6 @@
 package schema
 
-import exception.ParkingSlotUnavailableException
+import exception.ParkingSpotUnavailableException
 import exception.InvalidVehicleTypeException
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
@@ -44,7 +44,7 @@ class MallTest {
             location.parkVehicle(ticket)
         }
 
-        assertThrows<ParkingSlotUnavailableException> {
+        assertThrows<ParkingSpotUnavailableException> {
             location.getFreeParkingSpot(CAR)
         }
     }
