@@ -1,10 +1,13 @@
 package schema
 
-import exception.ParkingSlotUnavailable
+import exception.ParkingSlotUnavailableException
+import exception.UnknownVehicleException
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
+import schema.VehicleType.BIKE
+import schema.VehicleType.CAR
 
 class MallTest {
     @BeforeEach
@@ -13,27 +16,46 @@ class MallTest {
     }
 
     @Test
-    fun `it should get a spot for parking vehicle`() {
+    fun `it should test for an invalid vehicle type`() {
+        val location = Mall()
+
+        assertThrows<UnknownVehicleException> {
+            location.getFreeParkingSpot(BIKE)
+        }
+    }
+
+    @Test
+    fun `it should get a spot for parking car in the mall`() {
         val location = Mall()
         val expectedResponse = 0
 
-        val response = location.getFreeParkingSpot()
+        val response = location.getFreeParkingSpot(CAR)
 
         assertEquals(expectedResponse, response)
     }
 
     @Test
-    fun `it should not get a spot for parking vehicle`() {
+    fun `it should not get a spot for parking car in the mall`() {
         val location = Mall()
-        val ticket = Ticket()
+        val ticket = Ticket(vehicle = CAR)
 
         for (i in 1..100) {
-            location.getFreeParkingSpot()
+            location.getFreeParkingSpot(CAR)
             location.parkVehicle(ticket)
         }
 
-        assertThrows<ParkingSlotUnavailable> {
-            location.getFreeParkingSpot()
+        assertThrows<ParkingSlotUnavailableException> {
+            location.getFreeParkingSpot(CAR)
         }
+    }
+
+    @Test
+    fun `it should calculate the fee for the parked duration`() {
+        val location = Mall()
+        val expectedResponse = 30L
+
+        val response = location.calculateFee(CAR, 3)
+
+        assertEquals(expectedResponse, response)
     }
 }
