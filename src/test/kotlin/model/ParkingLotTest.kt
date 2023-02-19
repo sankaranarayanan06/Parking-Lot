@@ -19,7 +19,7 @@ class ParkingLotTest {
         val parkingLot = ParkingLot(totalNumberOfSpot = 100)
         val expectedResponse = 1
 
-        val response = parkingLot.accquireFreeSpot()
+        val response = parkingLot.getFreeSpot()
 
         assertEquals(expectedResponse, response)
     }
