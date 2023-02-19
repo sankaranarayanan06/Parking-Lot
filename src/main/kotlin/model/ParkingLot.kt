@@ -31,7 +31,7 @@ class ParkingLot(
         return null
     }
 
-    fun acquireFreeSpot(spot: Int): Boolean {
+    fun parkVehicle(spot: Int): Boolean {
         if (parkingSpots[spot - 1]) {
             parkingSpots[spot - 1] = false
             return true
@@ -44,7 +44,7 @@ class ParkingLot(
         return numberOfAvailableSpot > 0
     }
 
-    fun releaseAcquiredSpot(spot: Int): Boolean {
+    fun unparkVehicle(spot: Int): Boolean {
         if (!parkingSpots[spot - 1]) {
             parkingSpots[spot - 1] = true
             return true

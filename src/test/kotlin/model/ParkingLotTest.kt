@@ -38,10 +38,10 @@ class ParkingLotTest {
     fun `it should not allocate an already reserved spot`() {
         val parkingLot = ParkingLot(totalNumberOfSpot = 100)
 
-        parkingLot.run { acquireFreeSpot(1) }
+        parkingLot.run { parkVehicle(1) }
 
         assertThrows<SpotAlreadyAcquired> {
-            parkingLot.run { acquireFreeSpot(1) }
+            parkingLot.run { parkVehicle(1) }
         }
     }
 
@@ -49,7 +49,7 @@ class ParkingLotTest {
     fun `it should acquire a free spot`() {
         val parkingLot = ParkingLot(totalNumberOfSpot = 100)
 
-        val response = parkingLot.run { acquireFreeSpot(1) }
+        val response = parkingLot.run { parkVehicle(1) }
 
         assertTrue(response)
     }
@@ -57,9 +57,9 @@ class ParkingLotTest {
     @Test
     fun `it should release a reserved spot`() {
         val parkingLot = ParkingLot(totalNumberOfSpot = 100)
-        parkingLot.run { acquireFreeSpot(1) }
+        parkingLot.run { parkVehicle(1) }
 
-        val response = parkingLot.releaseAcquiredSpot(1)
+        val response = parkingLot.unparkVehicle(1)
 
         assertTrue(response)
     }
