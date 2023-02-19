@@ -5,4 +5,8 @@ class ParkingLot {
         return 1
     }
 
+    fun isSpotAvailable(): Boolean {
+        return true
+    }
+
 }
