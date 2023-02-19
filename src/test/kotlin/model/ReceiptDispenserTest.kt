@@ -15,7 +15,7 @@ class ReceiptDispenserTest {
                 vehicleType = VehicleType.CAR,
                 entryTime = LocalDateTime.of(2023, 2, 19, 12, 15).truncatedTo(ChronoUnit.MINUTES),
                 allocatedParkingSpot = it
-            )
+            ).generateTicket()
         }
         val receipt = ticket?.let {
             ReceiptDispenser(
@@ -27,7 +27,7 @@ class ReceiptDispenserTest {
         }
         val expectedResponse = Receipt(
             receiptNumber = 101,
-            fee = 0,
+            fee = 40,
             vehicleType = VehicleType.CAR,
             entryTime = LocalDateTime.of(2023, 2, 19, 12, 15).truncatedTo(ChronoUnit.MINUTES),
             exitTime = LocalDateTime.of(2023, 2, 19, 15, 30).truncatedTo(ChronoUnit.MINUTES),

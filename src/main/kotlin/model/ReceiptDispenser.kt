@@ -4,19 +4,20 @@ import model.VehicleType.CAR
 import java.time.LocalDateTime
 
 class ReceiptDispenser(
-    val ticket: TicketDispenser,
-    val receiptNumber: Int,
+    val ticket: Ticket,
+    val receiptNumber: Int = ticket.ticketNumber,
     val vehicleType: VehicleType = CAR,
     val exitTime: LocalDateTime = LocalDateTime.now()
 ) {
     fun generateReceipt(): Receipt {
+        val timeCalculator = TimeCalculator(
+            entryTime = ticket.entryTime,
+            exitTime = exitTime
+        )
         return Receipt(
             receiptNumber = receiptNumber,
-            parkedDuration = TimeCalculator(
-                entryTime = ticket.entryTime,
-                exitTime = exitTime
-            ).calculateParkedDuration(),
-            fee = 0,
+            parkedDuration = timeCalculator.calculateParkedDuration(),
+            fee = FeeCalculator().calculate(timeCalculator.convertToHours()),
             vehicleType = vehicleType,
             entryTime = ticket.entryTime,
             exitTime = exitTime
