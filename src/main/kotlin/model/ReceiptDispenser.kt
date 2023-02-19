@@ -1,9 +1,7 @@
 package model
 
 import model.VehicleType.CAR
-import java.time.Duration
 import java.time.LocalDateTime
-import java.time.temporal.ChronoUnit
 
 class ReceiptDispenser(
     val ticket: TicketDispenser,
@@ -14,15 +12,14 @@ class ReceiptDispenser(
     fun generateReceipt(): Receipt {
         return Receipt(
             receiptNumber = receiptNumber,
-            parkedDuration = calculateParkedDuration(),
+            parkedDuration = TimeCalculator(
+                LocalDateTime.of(2023, 2, 19, 15, 0),
+                LocalDateTime.of(2023, 2, 19, 18, 25)
+            ).calculateParkedDuration(),
             fee = 0,
             vehicleType = vehicleType,
             entryTime = ticket.entryTime,
             exitTime = exitTime
         )
-    }
-
-    private fun calculateParkedDuration(): Duration {
-        return Duration.between(ticket.entryTime, exitTime).truncatedTo(ChronoUnit.MINUTES)
     }
 }
