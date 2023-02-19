@@ -12,13 +12,13 @@ class TicketDispenserTest {
             ticketNumber = 101,
             vehicleType = VehicleType.CAR,
             entryTime = LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES),
-            allocatedParkingSpot = 1
+            allocatedParkingSpot = ParkingLot().getFreeSpot()
         )
         val expectedResponse = Ticket(
             ticketNumber = 101,
             vehicleType = VehicleType.CAR,
             entryTime = LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES),
-            allocatedParkingSpot = 1
+            allocatedParkingSpot = ParkingLot().getFreeSpot()
         )
 
         val response = ticket.generateTicket()
