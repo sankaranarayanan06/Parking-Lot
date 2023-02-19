@@ -13,8 +13,8 @@ class ReceiptDispenser(
         return Receipt(
             receiptNumber = receiptNumber,
             parkedDuration = TimeCalculator(
-                LocalDateTime.of(2023, 2, 19, 15, 0),
-                LocalDateTime.of(2023, 2, 19, 18, 25)
+                entryTime = ticket.entryTime,
+                exitTime = exitTime
             ).calculateParkedDuration(),
             fee = 0,
             vehicleType = vehicleType,

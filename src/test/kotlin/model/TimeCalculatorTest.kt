@@ -19,4 +19,17 @@ class TimeCalculatorTest {
 
         assertEquals(expectedResponse, response)
     }
+
+    @Test
+    fun `it should convert the duration into hours`() {
+        val timeCalculator = TimeCalculator(
+            LocalDateTime.of(2023, 2, 19, 15, 0),
+            LocalDateTime.of(2023, 2, 19, 18, 25),
+        )
+        val expectedResponse = 4L
+
+        val response = timeCalculator.convertToHours()
+
+        assertEquals(expectedResponse,response)
+    }
 }
