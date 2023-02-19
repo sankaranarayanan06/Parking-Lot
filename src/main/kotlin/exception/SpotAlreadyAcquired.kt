@@ -1,3 +1,3 @@
 package exception
 
-class SpotAlreadyAcquired : Throwable()
+class SpotAlreadyAcquired(message: String) : Throwable()

@@ -1,3 +1,3 @@
 package exception
 
-class SpotNotOccupiedException : Throwable()
+class SpotNotOccupiedException(message: String) : Throwable()

@@ -1,6 +1,7 @@
 package model
 
 import exception.SpotAlreadyAcquired
+import exception.SpotNotOccupiedException
 import java.util.*
 
 //object Singleton {
@@ -30,16 +31,26 @@ class ParkingLot(
         return null
     }
 
-    fun acquireFreeSpot(spot: Int) {
+    fun acquireFreeSpot(spot: Int): Boolean {
         if (parkingSpots[spot - 1]) {
             parkingSpots[spot - 1] = false
+            return true
         } else {
-            throw SpotAlreadyAcquired()
+            throw SpotAlreadyAcquired("Parking spot already acquired.")
         }
     }
 
     fun isSpotAvailable(): Boolean {
         return numberOfAvailableSpot > 0
+    }
+
+    fun releaseAcquiredSpot(spot: Int): Boolean {
+        if (!parkingSpots[spot - 1]) {
+            parkingSpots[spot - 1] = true
+            return true
+        } else {
+            throw SpotNotOccupiedException("Parking Spot was not acquired by any vehicle.")
+        }
     }
 
 }
