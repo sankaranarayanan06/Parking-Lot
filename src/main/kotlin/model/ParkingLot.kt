@@ -1,14 +1,24 @@
 package model
 
+import java.util.*
+
 class ParkingLot(
     val totalNumberOfSpot: Int
 ) {
-    fun getFreeSpot(): Int {
+    private val parkingSpot: List<Boolean>
+    private var numberOfAvailableSpot: Int
+
+    init {
+        parkingSpot = Collections.nCopies(totalNumberOfSpot, true).toMutableList()
+        numberOfAvailableSpot = totalNumberOfSpot
+    }
+
+    fun accquireFreeSpot(): Int {
         return 1
     }
 
     fun isSpotAvailable(): Boolean {
-        return true
+        return numberOfAvailableSpot > 0
     }
 
 }
