@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test
 class ParkingLotTest {
     @Test
     fun `it should check if a free spot is available`() {
-        val parkingLot = ParkingLot()
+        val parkingLot = ParkingLot(100)
 
         val response = parkingLot.isSpotAvailable()
 

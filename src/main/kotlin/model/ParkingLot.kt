@@ -1,6 +1,8 @@
 package model
 
-class ParkingLot {
+class ParkingLot(
+    val totalNumberOfSpot: Int
+) {
     fun getFreeSpot(): Int {
         return 1
     }
